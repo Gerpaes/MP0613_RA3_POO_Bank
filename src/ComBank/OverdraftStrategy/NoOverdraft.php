@@ -13,12 +13,12 @@ class NoOverdraft implements OverdraftInterface
 
 {
 
-    public function isGrantOverdraftFounds(float $withdrawAmount): bool
+    public function isGrantOverdraftFunds(float $withdrawAmount): bool
     {
         return $withdrawAmount >= 0;
     }
 
-    public function getOverdraftFounds(): float
+    public function getOverdraftFunds(): float
     {
         return 0.0;
     }   
