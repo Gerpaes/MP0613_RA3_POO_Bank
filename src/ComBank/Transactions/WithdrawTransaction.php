@@ -30,7 +30,7 @@ class WithdrawTransaction implements BankTransactionInterface
         
         $newBalance = $bankAccount->getBalance() - $this->amount;
 
-        if (!$bankAccount->getOverdraft()->isGrantOverdraftFounds($newBalance)) {
+        if (!$bankAccount->getOverdraft()->isGrantOverdraftFunds($newBalance)) {
             throw new InvalidOverdraftFundsException('Fondos insuficientes');
         }
        
