@@ -12,6 +12,8 @@ use ComBank\Exceptions\InvalidOverdraftFundsException;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 use ComBank\Support\Traits\AmountValidationTrait;
 
+use function PHPUnit\Framework\assertEquals;
+
 class WithdrawTransaction implements BankTransactionInterface
 
 {
@@ -47,7 +49,7 @@ class WithdrawTransaction implements BankTransactionInterface
 
     public function getTransactionInfo(): string
     {
-        return "Withdraw Transaction: Amount - " . $this->amount;
+        return 'WITHDRAW_TRANSACTION';
 
     }
    
