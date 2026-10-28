@@ -12,8 +12,6 @@ use ComBank\Exceptions\InvalidOverdraftFundsException;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 use ComBank\Support\Traits\AmountValidationTrait;
 
-use function PHPUnit\Framework\assertEquals;
-
 class WithdrawTransaction implements BankTransactionInterface
 
 {
