@@ -22,7 +22,7 @@ use ComBank\Transactions\Contracts\BankTransactionInterface;
 class BankAccount implements BankAccountInterface
 {
     private float $balance;
-    private bool $status = true;
+    private string  $status = self::STATUS_OPEN;
 
     private OverdraftInterface $overdraft;
 
@@ -39,26 +39,26 @@ class BankAccount implements BankAccountInterface
 
     public function closeAccount(): void
 {
-    if (!$this->status) {
+    if ($this->status !== self::STATUS_OPEN) {
         throw new BankAccountException('Account is already closed.');
     }
 
-    $this->status = false;
+    $this->status = self::STATUS_CLOSED;
 }
 
     public function isOpen(): bool
     {
-        return $this->status;
+        return $this->status === self::STATUS_OPEN;
     }
 
     public function reopenAccount(): void{
         
        
-    if ($this->status) {
+    if ($this->status !== self::STATUS_CLOSED) {
         throw new BankAccountException('Account is already open.');
     }
 
-    $this->status = true;
+    $this->status = self::STATUS_OPEN;
 }
 
     public function transaction(BankTransactionInterface $bankTransactionInterface): void{
