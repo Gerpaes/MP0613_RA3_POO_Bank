@@ -1,4 +1,7 @@
-<?php namespace ComBank\OverdraftStrategy;
+<?php
+
+namespace ComBank\OverdraftStrategy;
+
 use ComBank\OverdraftStrategy\Contracts\OverdraftInterface;
 
 /**
@@ -15,14 +18,13 @@ class SilverOverdraft implements OverdraftInterface
 {
 
 
-  public function isGrantOverdraftFunds( float $newBalance): bool
-  {
-      return $newBalance >= -$this->getOverdraftFunds();
-  }
+    public function isGrantOverdraftFunds(float $newBalance): bool
+    {
+        return $newBalance >= -$this->getOverdraftFunds();
+    }
 
-  public function getOverdraftFunds(): float
-  {
-      return 100.00;
-  }
-    
+    public function getOverdraftFunds(): float
+    {
+        return 100.00;
+    }
 }
