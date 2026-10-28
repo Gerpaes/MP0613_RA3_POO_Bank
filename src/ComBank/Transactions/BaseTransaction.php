@@ -9,7 +9,6 @@ namespace ComBank\Transactions;
  * Time: 1:24 PM
  */
 
-
 use ComBank\Support\Traits\AmountValidationTrait;
 
 abstract class BaseTransaction
@@ -18,7 +17,6 @@ abstract class BaseTransaction
 
 
     protected float $amount;
-
     public function __construct(float $amount)
     {
         $this->validateAmount($amount);

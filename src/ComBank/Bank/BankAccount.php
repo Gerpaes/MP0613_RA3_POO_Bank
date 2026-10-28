@@ -51,8 +51,6 @@ class BankAccount implements BankAccountInterface
 
     public function reopenAccount(): void
     {
-
-
         if ($this->status !== self::STATUS_CLOSED) {
             throw new BankAccountException('Account is already open.');
         }
@@ -85,7 +83,6 @@ class BankAccount implements BankAccountInterface
 
     public function applyOverdraft(OverdraftInterface $overdraft): void
     {
-
         $this->overdraft = $overdraft;
     }
 }

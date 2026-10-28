@@ -13,23 +13,16 @@ use ComBank\Bank\Contracts\BankAccountInterface;
 use ComBank\Exceptions\InvalidOverdraftFundsException;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 
-
 class WithdrawTransaction extends BaseTransaction implements BankTransactionInterface
 
 {
-
-
     public function applyTransaction(BankAccountInterface $bankAccount): float
     {
-
-
-
         $newBalance = $bankAccount->getBalance() - $this->amount;
 
         if (!$bankAccount->getOverdraft()->isGrantOverdraftFunds($newBalance)) {
             throw new InvalidOverdraftFundsException('Fondos insuficientes');
         }
-
 
         return $newBalance;
     }

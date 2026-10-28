@@ -14,7 +14,6 @@ use ComBank\OverdraftStrategy\Contracts\OverdraftInterface;
 class NoOverdraft implements OverdraftInterface
 
 {
-
     public function isGrantOverdraftFunds(float $newBalance): bool
     {
         return $newBalance >= 0;
