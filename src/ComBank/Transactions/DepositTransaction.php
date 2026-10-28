@@ -8,20 +8,14 @@
  */
 
 use ComBank\Bank\Contracts\BankAccountInterface;
-use ComBank\Support\Traits\AmountValidationTrait;
+
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 
 
 class DepositTransaction extends BaseTransaction implements BankTransactionInterface 
 {
-    use AmountValidationTrait;
+    
 
-
-public function __construct(float $amount)
-{
-    $this->validateAmount($amount);
-    $this->amount = $amount;
-}
 
 public function applyTransaction(BankAccountInterface $bankAccount): float{
     
@@ -29,11 +23,6 @@ public function applyTransaction(BankAccountInterface $bankAccount): float{
     
 }
 
-public function getAmount(): float
-{
-    return $this->amount;
-   
-}
 
 public function getTransactionInfo(): string
 {

@@ -10,19 +10,12 @@
 use ComBank\Bank\Contracts\BankAccountInterface;
 use ComBank\Exceptions\InvalidOverdraftFundsException;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
-use ComBank\Support\Traits\AmountValidationTrait;
+
 
 class WithdrawTransaction extends BaseTransaction implements BankTransactionInterface
 
 {
-    use AmountValidationTrait;
     
-
-    public function __construct(float $amount)
-    {
-        $this->validateAmount($amount);
-        $this->amount = $amount;
-    }
 
     public function applyTransaction(BankAccountInterface $bankAccount){
 
@@ -37,12 +30,6 @@ class WithdrawTransaction extends BaseTransaction implements BankTransactionInte
 
         return $newBalance;
         
-    }
-
-    public function getAmount(): float
-    {
-        return $this->amount;
-       
     }
 
     public function getTransactionInfo(): string
