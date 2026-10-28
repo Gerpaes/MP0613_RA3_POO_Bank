@@ -12,10 +12,10 @@ use ComBank\Support\Traits\AmountValidationTrait;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 
 
-class DepositTransaction implements BankTransactionInterface
+class DepositTransaction extends BaseTransaction implements BankTransactionInterface 
 {
     use AmountValidationTrait;
-private float $amount;
+
 
 public function __construct(float $amount)
 {

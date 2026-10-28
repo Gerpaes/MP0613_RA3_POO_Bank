@@ -7,15 +7,15 @@
  * Time: 1:24 PM
  */
 
-use ComBank\Exceptions\InvalidArgsException;
-use ComBank\Exceptions\ZeroAmountException;
+
 use ComBank\Support\Traits\AmountValidationTrait;
 
 abstract class BaseTransaction
 {
- protected float $amount;
+use AmountValidationTrait;
 
-    use AmountValidationTrait;
+
+ protected float $amount;
 
     public function __construct(float $amount)
     {

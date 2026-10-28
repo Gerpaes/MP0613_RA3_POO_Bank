@@ -12,11 +12,11 @@ use ComBank\Exceptions\InvalidOverdraftFundsException;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 use ComBank\Support\Traits\AmountValidationTrait;
 
-class WithdrawTransaction implements BankTransactionInterface
+class WithdrawTransaction extends BaseTransaction implements BankTransactionInterface
 
 {
     use AmountValidationTrait;
-    private float $amount;
+    
 
     public function __construct(float $amount)
     {
