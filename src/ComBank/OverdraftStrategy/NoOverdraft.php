@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 namespace ComBank\OverdraftStrategy;
+
 use ComBank\OverdraftStrategy\Contracts\OverdraftInterface;
 
 /**
@@ -21,6 +23,5 @@ class NoOverdraft implements OverdraftInterface
     public function getOverdraftFunds(): float
     {
         return 0.0;
-    }   
-   
+    }
 }
