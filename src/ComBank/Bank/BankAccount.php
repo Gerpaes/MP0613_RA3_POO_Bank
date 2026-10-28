@@ -69,20 +69,11 @@ class BankAccount implements BankAccountInterface
         try {
             $newBalance = $bankTransactionInterface->applyTransaction($this);
             $this->setBalance($newBalance);
-        } catch (ZeroAmountException $e) {
-            throw new FailedTransactionException($e->getMessage(), $e->getCode(), $e);
-        } catch (InvalidArgsException $e) {
-            throw new FailedTransactionException($e->getMessage(), $e->getCode(), $e);
-        } catch (BankAccountException $e) {
-            throw new FailedTransactionException($e->getMessage(), $e->getCode(), $e);
-        } catch (FailedTransactionException $e) {
-            throw new FailedTransactionException($e->getMessage(), $e->getCode(), $e);
+        
         }
         catch (InvalidOverdraftFundsException $e) {
             throw new FailedTransactionException($e->getMessage(), $e->getCode(), $e);
-        } catch (\Exception $e) {
-            throw new FailedTransactionException('An unexpected error occurred during the transaction.', $e->getCode(), $e);
-    }
+        } 
     }
 
     public function setBalance(float $newBalance):void{
