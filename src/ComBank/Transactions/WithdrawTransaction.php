@@ -17,7 +17,7 @@ class WithdrawTransaction extends BaseTransaction implements BankTransactionInte
 {
     
 
-    public function applyTransaction(BankAccountInterface $bankAccount){
+    public function applyTransaction(BankAccountInterface $bankAccount): float{
 
     
         
