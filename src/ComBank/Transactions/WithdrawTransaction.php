@@ -14,7 +14,6 @@ use ComBank\Exceptions\InvalidOverdraftFundsException;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 
 class WithdrawTransaction extends BaseTransaction implements BankTransactionInterface
-
 {
     public function applyTransaction(BankAccountInterface $bankAccount): float
     {
