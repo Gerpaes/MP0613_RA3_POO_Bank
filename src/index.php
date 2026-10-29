@@ -77,14 +77,14 @@ try {
     pl('My new balance after deposit (+100) : ' . formatBalance($bankAccount2->getBalance()));
 
     // withdrawal -300
-    pl('Doing transaction deposit (-300) with current balance ' . formatBalance($bankAccount2->getBalance()));
+    pl('Doing transaction withdrawal (-300) with current balance ' . formatBalance($bankAccount2->getBalance()));
 
     $bankAccount2->transaction(new WithdrawTransaction(300));
 
     pl('My new balance after withdrawal (-300) : ' . formatBalance($bankAccount2->getBalance()));
 
     // withdrawal -50
-    pl('Doing transaction deposit (-50) with current balance ' . formatBalance($bankAccount2->getBalance()));
+    pl('Doing transaction withdrawal (-50) with current balance ' . formatBalance($bankAccount2->getBalance()));
 
     $bankAccount2->transaction(new WithdrawTransaction(50));
 
