@@ -32,3 +32,8 @@ function vd($mixed)
     var_dump($mixed);
     echo "<br>";
 }
+
+function formatBalance(float $balance): string
+{
+    return sprintf('%.1f', $balance);
+}

@@ -112,8 +112,3 @@ try {
 } catch (BankAccountException $e) {
     pl($e->getMessage());
 }
-
-function formatBalance(float $balance): string
-{
-    return sprintf('%.1f', $balance);
-}
