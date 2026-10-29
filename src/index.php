@@ -58,7 +58,13 @@ try {
     pl('Error transaction: ' . $e->getMessage());
 }
 pl('My balance after failed last transaction : ' . formatBalance($bankAccount1->getBalance()));
-
+// close account
+try {
+    $bankAccount1->closeAccount();
+    pl('My account is now closed.');
+} catch (BankAccountException $e) {
+    pl('Error: ' . $e->getMessage());
+}
 
 
 
@@ -108,7 +114,13 @@ try {
 }
 pl('My new balance after withdrawal (-20) with funds : ' . formatBalance($bankAccount2->getBalance()));
 
+// close account
 try {
+    $bankAccount2->closeAccount();
+    pl('My account is now closed.');
+
+    // close account again (should fail)
+    $bankAccount2->closeAccount();
 } catch (BankAccountException $e) {
-    pl($e->getMessage());
+    pl('Error: ' . $e->getMessage());
 }
