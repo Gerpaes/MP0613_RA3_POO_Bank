@@ -14,6 +14,7 @@ use ComBank\Transactions\WithdrawTransaction;
 use ComBank\Exceptions\BankAccountException;
 use ComBank\Exceptions\FailedTransactionException;
 use ComBank\Exceptions\ZeroAmountException;
+use ComBank\Transactions\InterestTransaction;
 
 require_once 'bootstrap.php';
 
@@ -100,6 +101,12 @@ try {
     pl('Doing transaction withdrawal (-120) with current balance ' . formatBalance($bankAccount2->getBalance()));
 
     $bankAccount2->transaction(new WithdrawTransaction(120));
+
+    pl('Doing transaction InterestTransaction (-50) with current balance ' . formatBalance($bankAccount2->getBalance()));
+
+    $bankAccount2->transaction(new InterestTransaction(50));
+
+    pl('My new balance after interestTransaction (-50) with funds : ' . formatBalance($bankAccount2->getBalance()));
 } catch (FailedTransactionException $e) {
     pl('Error transaction: ' . $e->getMessage());
 }

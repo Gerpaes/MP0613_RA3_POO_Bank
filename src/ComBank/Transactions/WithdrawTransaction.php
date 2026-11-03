@@ -35,4 +35,9 @@ class WithdrawTransaction extends BaseTransaction implements BankTransactionInte
     {
         return 'WITHDRAW_TRANSACTION';
     }
+
+    public function getAmount(): float
+    {
+        return $this->amount;
+    }
 }
