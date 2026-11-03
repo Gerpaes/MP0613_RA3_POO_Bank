@@ -3,6 +3,7 @@
 namespace ComBank\OverdraftStrategy;
 
 use ComBank\OverdraftStrategy\Contracts\OverdraftInterface;
+use Override;
 
 /**
  * Created by VS Code.
@@ -22,5 +23,11 @@ class NoOverdraft implements OverdraftInterface
     public function getOverdraftFunds(): float
     {
         return 0.0;
+    }
+
+    
+    public function getInterestRate(): int
+    {
+        return 0.01;
     }
 }

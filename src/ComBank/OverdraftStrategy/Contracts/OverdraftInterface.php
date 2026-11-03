@@ -14,4 +14,6 @@ interface OverdraftInterface
     public function isGrantOverdraftFunds(float $newBalance): bool;
 
     public function getOverdraftFunds(): float;
+
+    public function getInterestRate(): int;
 }
