@@ -20,7 +20,7 @@ require_once 'bootstrap.php';
 
 //---[Bank account 1]---/
 // create a new account1 with balance 400
-$bankAccount1 = new BankAccount(400);
+$bankAccount1 = new BankAccount(400, "john.smith@example.com");
 pl('--------- [Start testing bank account #1, No overdraft] --------');
 try {
     // show balance account
@@ -69,7 +69,7 @@ try {
 
 
 //---[Bank account 2]---/
-$bankAccount2 = new BankAccount(200);
+$bankAccount2 = new BankAccount(200, "john.smith@example.com");
 $bankAccount2->applyOverdraft(new SilverOverdraft());
 pl('--------- [Start testing bank account #2, Silver overdraft (100.0 funds)] --------');
 try {

@@ -16,18 +16,22 @@ use ComBank\Exceptions\FailedTransactionException;
 use ComBank\Exceptions\InvalidOverdraftFundsException;
 use ComBank\OverdraftStrategy\Contracts\OverdraftInterface;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
+use ComBank\Support\Traits\AmountValidationTrait;
 
 class BankAccount implements BankAccountInterface
 {
+    use AmountValidationTrait;
     private float $balance;
     private string $status = self::STATUS_OPEN;
 
-    private OverdraftInterface $overdraft;
+    private string $email = "";   
+     private OverdraftInterface $overdraft;
 
-    public function __construct(float $newBalance)
+    public function __construct(float $newBalance, string $email)
     {
         $this->balance = $newBalance;
         $this->overdraft = new NoOverdraft();
+        $this->setEmail($email);
     }
 
     public function getBalance(): float
@@ -84,5 +88,14 @@ class BankAccount implements BankAccountInterface
     public function applyOverdraft(OverdraftInterface $overdraft): void
     {
         $this->overdraft = $overdraft;
+    }
+
+    public function getEmail(): string{
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void{
+        $this->validateEmail($email);
+        $this->email = $email;
     }
 }

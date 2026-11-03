@@ -20,7 +20,7 @@ class DepositTransactionTest extends TestCase
      * */
     public function testApplyTransaction()
     {
-        $bankAccount =  new BankAccount(50.25);
+        $bankAccount =  new BankAccount(50.25, "john.smith@example.com");
         $amount = 25.25;
         $trans = new DepositTransaction($amount);
         $newBalance = $trans->applyTransaction($bankAccount);

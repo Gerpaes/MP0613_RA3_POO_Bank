@@ -7,20 +7,22 @@ use ComBank\Exceptions\BankAccountException;
 use ComBank\Exceptions\FailedTransactionException;
 use ComBank\Transactions\DepositTransaction;
 use ComBank\Transactions\WithdrawTransaction;
+use ComBank\Exceptions\InvalidArgsException;
+
 
 class BankAccountTest extends TestCase
 {
     // Test that a new BankAccount is initialized with the correct balance
     public function testInitialBalanceIsSetCorrectly(): void
     {
-        $account = new BankAccount(100.0);
+        $account = new BankAccount(100.0, "john.smith@example.com");
         $this->assertEqualsWithDelta(100.0, $account->getBalance(), 0.001);
     }
 
     // Test that a deposit transaction updates the balance correctly
     public function testDepositTransaction(): void
     {
-        $bankAccount = new BankAccount(200.0);
+        $bankAccount = new BankAccount(200.0, "john.smith@example.com");
         $bankAccount->transaction(new DepositTransaction(30.0));
         $this->assertEqualsWithDelta(230.0, $bankAccount->getBalance(), 0.001);
     }
@@ -28,7 +30,7 @@ class BankAccountTest extends TestCase
     // Test that a withdrawal transaction updates the balance correctly
     public function testWithdrawTransaction(): void
     {
-        $bankAccount = new BankAccount(200.0);
+        $bankAccount = new BankAccount(200.0, "john.smith@example.com");
         $bankAccount->transaction(new WithdrawTransaction(150.0));
         $this->assertEqualsWithDelta(50.0, $bankAccount->getBalance(), 0.001);
     }
@@ -38,14 +40,14 @@ class BankAccountTest extends TestCase
     {
         $this->expectException(BankAccountException::class);
 
-        $account = new BankAccount(100.0);
+        $account = new BankAccount(100.0, "john.smith@example.com");
         $account->reopenAccount();  // should throw an exception because the account is already open
     }
 
     // Test closing and reopening the bank account
     public function testCanCloseAndReopenAccount(): void
     {
-        $account = new BankAccount(100.0);
+        $account = new BankAccount(100.0, "john.smith@example.com");
         $account->closeAccount();
         $this->assertFalse($account->isOpen());
 
@@ -56,7 +58,7 @@ class BankAccountTest extends TestCase
     // Test overdraft application with a mock OverdraftInterface
     public function testWithdrawWithOverdraft(): void
     {
-        $bankAccount = new BankAccount(250.0);
+        $bankAccount = new BankAccount(250.0, "john.smith@example.com");
         $bankAccount->applyOverdraft(new SilverOverdraft());
         $bankAccount->transaction(new WithdrawTransaction(300.0));
 
@@ -68,7 +70,7 @@ class BankAccountTest extends TestCase
     {
         $this->expectException(FailedTransactionException::class);        
 
-        $bankAccount = new BankAccount(100.0);
+        $bankAccount = new BankAccount(100.0, "john.smith@example.com");
         $bankAccount->applyOverdraft(new SilverOverdraft());        
         $bankAccount->transaction(new WithdrawTransaction(201.0));// should fail
     }
@@ -78,9 +80,21 @@ class BankAccountTest extends TestCase
     {
         $this->expectException(BankAccountException::class);
 
-        $bankAccount = new BankAccount(100.0);
+        $bankAccount = new BankAccount(100.0, "john.smith@example.com");
         $bankAccount->closeAccount();
 
         $bankAccount->transaction(new DepositTransaction(50.0));  // Should throw exception because the account is closed
+    }
+
+    public function testValidEmailIsStored(): void
+    {
+        $account = new BankAccount(100.0, 'john.smith@example.com');
+        $this->assertSame('john.smith@example.com', $account->getEmail());
+    }
+
+    public function testInvalidEmailIsRejected(): void
+    {
+        $this->expectException(InvalidArgsException::class);
+        new BankAccount(100.0, 'johnexample.com');
     }
 }

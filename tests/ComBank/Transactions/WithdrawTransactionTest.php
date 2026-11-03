@@ -25,7 +25,7 @@ class WithdrawTransactionTest extends TestCase
     public function testWithdrawTransactionMoreThanBalance()
     {     
 
-        $bankAccount = new BankAccount(150.0);
+        $bankAccount = new BankAccount(150.0, "john.smith@example.com");
         $amount = 50;
         $trans = new WithdrawTransaction($amount);
         $newBalance = $trans->applyTransaction($bankAccount);
@@ -39,7 +39,7 @@ class WithdrawTransactionTest extends TestCase
     {
         $this->expectException(InvalidOverdraftFundsException::class);
 
-        $bankAccount = new BankAccount(100.0);
+        $bankAccount = new BankAccount(100.0, "john.smith@example.com");
 
         $amount = 150;
         $trans = new WithdrawTransaction($amount);
@@ -51,7 +51,7 @@ class WithdrawTransactionTest extends TestCase
      * */
     public function testWithdrawTransactionLessThanBalanceWithOverdraft()
     {
-        $bankAccount = new BankAccount(100.0);
+        $bankAccount = new BankAccount(100.0, "john.smith@example.com");
         $bankAccount->applyOverdraft(new SilverOverdraft());
 
         $amount = 150;
