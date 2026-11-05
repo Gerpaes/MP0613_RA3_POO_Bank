@@ -28,6 +28,6 @@ class NoOverdraft implements OverdraftInterface
     
     public function getInterestRate(): int
     {
-        return 0.01;
+        return 1;
     }
 }

@@ -47,6 +47,13 @@ try {
 
     pl('My new balance after withdrawal (-25) : ' . formatBalance($bankAccount1->getBalance()));
 
+    // interest (No overdraft = 1%)
+    pl('Doing transaction interest (1%) with current balance ' . formatBalance($bankAccount1->getBalance()));
+
+    $bankAccount1->transaction(new InterestTransaction());
+
+    pl('My new balance after interest (1%) : ' . formatBalance($bankAccount1->getBalance()));
+
     // withdrawal -600
     pl('Doing transaction withdrawal (-600) with current balance ' . formatBalance($bankAccount1->getBalance()));
 
@@ -83,6 +90,7 @@ try {
 
     pl('My new balance after deposit (+100) : ' . formatBalance($bankAccount2->getBalance()));
 
+
     // withdrawal -300
     pl('Doing transaction withdrawal (-300) with current balance ' . formatBalance($bankAccount2->getBalance()));
 
@@ -101,12 +109,6 @@ try {
     pl('Doing transaction withdrawal (-120) with current balance ' . formatBalance($bankAccount2->getBalance()));
 
     $bankAccount2->transaction(new WithdrawTransaction(120));
-
-    pl('Doing transaction InterestTransaction (-50) with current balance ' . formatBalance($bankAccount2->getBalance()));
-
-    $bankAccount2->transaction(new InterestTransaction(50));
-
-    pl('My new balance after interestTransaction (-50) with funds : ' . formatBalance($bankAccount2->getBalance()));
 } catch (FailedTransactionException $e) {
     pl('Error transaction: ' . $e->getMessage());
 }

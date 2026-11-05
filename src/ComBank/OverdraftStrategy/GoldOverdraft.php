@@ -30,6 +30,6 @@ class GoldOverdraft implements OverdraftInterface
 
     public function getInterestRate(): int
     {
-        return 0.10;
+        return 10;
     }
 }

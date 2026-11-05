@@ -10,26 +10,31 @@ namespace ComBank\Transactions;
  */
 
 use ComBank\Bank\Contracts\BankAccountInterface;
-use ComBank\Exceptions\InvalidOverdraftFundsException;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 
 class InterestTransaction extends BaseTransaction implements BankTransactionInterface
 {
+    // The interest is calculated from the balance, so no amount is needed.
+    public function __construct()
+    {
+        $this->amount = 0.0;
+    }
+
     public function applyTransaction(BankAccountInterface $bankAccount): float
     {
+        $balance = $bankAccount->getBalance();
+        $rate    = $bankAccount->getOverdraft()->getInterestRate();
 
-        
-        return ($bankAccount->getOverdraft()->getInterestRate() * $bankAccount->getBalance()) + $bankAccount->getBalance();
-
-        
+        return $balance + ($balance * $rate / 100);
     }
+
     public function getTransactionInfo(): string
     {
-        return 'Interest_TRANSACTION';
+        return 'INTEREST_TRANSACTION';
     }
+
     public function getAmount(): float
     {
         return $this->amount;
     }
-    
 }
